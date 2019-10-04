@@ -8,7 +8,7 @@ let WorkerManager = require('../lib/omr-base/worker/WorkerManager');
 let Enumerator = require('../class/Enumerator');
 let Config = require('../config/Config');
 let path = require('path');
-let ImageMagick = require('gm').subClass({imageMagick: true, appPath: Config.ImageMagickPath});
+let ImageMagick = require('gm').subClass({ imageMagick: true, appPath: Config.ImageMagickPath });
 let QRCode = require('mstech-node-qrcode');
 
 class ExamController {
@@ -810,7 +810,7 @@ class ExamController {
         this.Update(this.exam, (err) => {
             if (err) errors.push(err);
 
-            ret = {ErrorList: errors};
+            ret = { ErrorList: errors };
             ret['Exam'] = this.exam;
 
             if (Config.KeepResults(this.exam.processStatus, Enumerator.ProcessStatus, Enumerator.KeepResultLevel) === true) {
@@ -829,6 +829,7 @@ class ExamController {
      * @param callback {Function}
      */
     saveProcessedImage(exam, callback) {
+
         const filePath = Config.FileResource.PATH.BASE + Config.FileResource.DIRECTORY.RESULT + "/" + exam._id + '.' + Enumerator.FileExtensions.PNG;
 
         fs.open(filePath, 'w', (error, fd) => {
@@ -852,6 +853,7 @@ class ExamController {
      * @param callback {Function}
      */
     static getFile(exam, callback) {
+
         let filePath = Config.FileResource.PATH.BASE + Config.FileResource.DIRECTORY.EQUALIZED + "/" + exam._id + '.' + Enumerator.FileExtensions.PNG;
 
         fs.open(filePath, 'r', (error, fd) => {
