@@ -157,7 +157,7 @@ function loadExamsFromDB() {
                 process.exit(1);
             });
         } else if (!examList.length) {
-            Aggregation.data.processStatus = Enumerator.ProcessStatus.RAW;
+            Aggregation.data.processStatus = Enumerator.ProcessStatus.FINISHED;
             updateAggregation(false);
         } else {
             Connector.SendAggregationLog({
