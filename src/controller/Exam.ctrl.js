@@ -140,8 +140,23 @@ class ExamController {
         });
 
         /**
-         * name: CropImage
+         * name: FindClippingPoint
          * depends: DrawImage
+         */
+        this.wM.Push({
+            name: WorkerManager.JobList.FindClippingPoint,
+            job: WorkerManager.JobList.FindClippingPoint,
+            params: [
+                this.canvas,
+                this.context,
+                this.image
+            ],
+            depends: WorkerManager.JobList.DrawImage
+        });
+
+        /**
+         * name: CropImage
+         * depends: FindClippingPoint
          */
         this.wM.Push({
             name: WorkerManager.JobList.CropImage,
@@ -155,7 +170,7 @@ class ExamController {
                 Config.CropRate.WIDTH,
                 Config.CropRate.HEIGHT
             ],
-            depends: WorkerManager.JobList.DrawImage
+            depends: WorkerManager.JobList.FindClippingPoint
         });
 
         /**
@@ -611,9 +626,25 @@ class ExamController {
             ],
             depends: "GET_IMAGE_FILE"
         });
+
+        /**
+         * name: FindClippingPoint
+         * depends: DrawImage
+         */
+        this.wM.Push({
+            name: WorkerManager.JobList.FindClippingPoint,
+            job: WorkerManager.JobList.FindClippingPoint,
+            params: [
+                this.canvas,
+                this.context,
+                this.image
+            ],
+            depends: WorkerManager.JobList.DrawImage
+        });
+
         /**
          * name: CropImage
-         * depends: DrawImage
+         * depends: FindClippingPoint
          */
         this.wM.Push({
             name: WorkerManager.JobList.CropImage,
@@ -627,7 +658,7 @@ class ExamController {
                 Config.CropRate.WIDTH,
                 Config.CropRate.HEIGHT
             ],
-            depends: WorkerManager.JobList.DrawImage
+            depends: WorkerManager.JobList.FindClippingPoint
         });
         /**
          * name: PrepareCornerDetection
