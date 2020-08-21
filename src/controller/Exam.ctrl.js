@@ -149,7 +149,9 @@ class ExamController {
             params: [
                 this.canvas,
                 this.context,
-                this.image
+                this.image,
+                Canvas.Image,
+                Config
             ],
             depends: WorkerManager.JobList.DrawImage
         });
@@ -637,7 +639,9 @@ class ExamController {
             params: [
                 this.canvas,
                 this.context,
-                this.image
+                this.image,
+                Canvas.Image,
+                Config
             ],
             depends: WorkerManager.JobList.DrawImage
         });
